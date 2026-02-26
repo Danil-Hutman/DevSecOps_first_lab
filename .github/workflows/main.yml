@@ -45,11 +45,12 @@ jobs:
             CREATE TABLE IF NOT EXISTS Cactus (
               id INT AUTO_INCREMENT PRIMARY KEY,
               name VARCHAR(100) NOT NULL,
-              price DECIMAL(10,2) NOT NULL
+              price DECIMAL(10,2) NOT NULL,
+              description VARCHAR(255)
             );
-            INSERT INTO Cactus (name, price) VALUES
-              ('Golden Barrel', 25.50),
-              ('Prickly Pear', 15.00);
+            INSERT INTO Cactus (name, price, description) VALUES
+              ('Golden Barrel', 25.50, 'Round cactus with golden spines'),
+              ('Prickly Pear', 15.00, 'Flat pads with edible fruit');
           "
 
       - name: Run tests with Secret
