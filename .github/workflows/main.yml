@@ -38,6 +38,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install .[test]
 
+      - name: Init DB schema
+        run: |
+          sudo apt-get install -y mysql-client
+          mysql -h 127.0.0.1 -u root -p${{ secrets.DB_PASSWORD }} cactus_store -e "
+            CREATE TABLE IF NOT EXISTS Cactus (
+              id INT AUTO_INCREMENT PRIMARY KEY,
+              name VARCHAR(100) NOT NULL,
+              price DECIMAL(10,2) NOT NULL
+            );
+            INSERT INTO Cactus (name, price) VALUES
+              ('Golden Barrel', 25.50),
+              ('Prickly Pear', 15.00);
+          "
+
       - name: Run tests with Secret
         env:
           DB_HOST: localhost
