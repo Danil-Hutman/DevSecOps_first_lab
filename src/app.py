@@ -4,6 +4,7 @@ from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 
+
 def get_db_connection():
     conn = pymysql.connect(
         host=os.getenv("DB_HOST"),
@@ -15,9 +16,11 @@ def get_db_connection():
     )
     return conn
 
+
 @app.route("/")
 def index():
     return render_template("index.html")
+
 
 @app.route("/cactus")
 def cactus_list():
@@ -32,3 +35,4 @@ def cactus_list():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
+    
