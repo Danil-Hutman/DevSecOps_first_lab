@@ -2,6 +2,7 @@ import unittest
 
 from src.app import get_db_connection
 
+
 class TestDatabase(unittest.TestCase):
     def test_fetch_cactus_data(self):
         conn = get_db_connection()
@@ -22,6 +23,7 @@ class TestDatabase(unittest.TestCase):
 
         cursor.close()
         conn.close()
+
 
 if __name__ == "__main__":
     unittest.main()
