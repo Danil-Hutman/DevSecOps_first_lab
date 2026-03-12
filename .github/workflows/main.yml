@@ -37,7 +37,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install .[test]
       - name: Run Safety (Dependencies Security)
-        run: safety check
+        run: safety scan
 
   webapp-security:
     runs-on: ubuntu-latest
