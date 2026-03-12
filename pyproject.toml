@@ -16,6 +16,9 @@ dependencies = [
 [project.optional-dependencies]
 test = [
         "pytest==9.0.2",
+        "safety",
+        "flake8",
+        "bandit"
 ]
 [tool.setuptools.packages.find]
 where = ["."]
