@@ -28,15 +28,22 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install .[test]
+
+      - name: Install Safety
+        run: pip install safety
+
       - name: Run safety scan
+        if: secrets.SAFETY_API_KEY != ''
         run: safety scan --key ${{ secrets.SAFETY_API_KEY }}
 
   webapp-security:
