@@ -43,8 +43,7 @@ jobs:
         run: pip install safety
 
       - name: Run safety scan
-        if: secrets.SAFETY_API_KEY != ''
-        run: safety scan --key ${{ secrets.SAFETY_API_KEY }}
+      run: safety scan --key ${{ secrets.SAFETY_API_KEY }}
 
   webapp-security:
     runs-on: ubuntu-latest
