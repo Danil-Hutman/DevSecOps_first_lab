@@ -7,9 +7,56 @@ on:
     branches: ["main"]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install .[test]
+      - name: Run Flake8 (Linting)
+        run: flake8 src/ tests/
+
+  dependencies-security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install .[test]
+      - name: Run Safety (Dependencies Security)
+        run: safety check
+
+  webapp-security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install .[test]
+      - name: Run Bandit (Static Security Analysis)
+        run: bandit -r src
+
   test:
     runs-on: ubuntu-latest
-
     services:
       mysql:
         image: mysql:8.0
@@ -27,17 +74,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install .[test]
-
       - name: Init DB schema
         run: |
           sudo apt-get install -y mysql-client
@@ -52,12 +96,10 @@ jobs:
               ('Golden Barrel', 25.50, 'Round cactus with golden spines'),
               ('Prickly Pear', 15.00, 'Flat pads with edible fruit');
           "
-
       - name: Run tests with Secret
         env:
           DB_HOST: localhost
           DB_USER: root
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           DB_NAME: cactus_store
-        run: |
-          pytest -v
+        run: pytest -v
