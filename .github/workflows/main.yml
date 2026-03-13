@@ -43,7 +43,9 @@ jobs:
         run: pip install safety
 
       - name: Run safety scan
-        run: safety scan --key ${{ secrets.SAFETY_API_KEY }}
+        uses: pyupio/safety-action@v1
+        with:
+          api-key: ${{ secrets.SAFETY_API_KEY }}
 
   webapp-security:
     runs-on: ubuntu-latest
