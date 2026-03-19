@@ -20,14 +20,40 @@
     </style>
   </head>
   <body>
-    <h1 style="text-align: center">Каталог кактусів</h1>
-    <div id="cactus-list"></div>
-
+    <header
+      style="
+        text-align: center;
+        background-color: #4caf50;
+        color: white;
+        padding: 15px;
+      "
+    >
+      <h2>Welcome to the Cactus Catalog</h2>
+      <nav>
+        <a href="/" style="margin: 0 10px; color: white; text-decoration: none"
+          >Home</a
+        >
+        <a
+          href="/about"
+          style="margin: 0 10px; color: white; text-decoration: none"
+          >About</a
+        >
+        <a
+          href="/contact"
+          style="margin: 0 10px; color: white; text-decoration: none"
+          >Contact</a
+        >
+      </nav>
+    </header>
+    <main>
+      <h1 style="text-align: center">Каталог кактусів</h1>
+      <div id="cactus-list"></div>
+    </main>
+    <footer
+      style="text-align: center; margin-top: 20px; font-size: 14px; color: #666"
+    >
+      © 2026 Каталог кактусів. Всі права захищені.
+    </footer>
     <script src="{{ url_for('static', filename='js/cactus.js') }}"></script>
   </body>
-  <footer
-    style="text-align: center; margin-top: 20px; font-size: 14px; color: #666"
-  >
-    © 2026 Каталог кактусів. Всі права захищені.
-  </footer>
 </html>
